@@ -1,54 +1,21 @@
 <div class="container-coin">
-  <div>
+  <app-coin-spinner [show]="!coins?.length"></app-coin-spinner>
+
+  <div *ngIf="!showCoinDetail">
     <mat-card
       class="card-coin"
       *ngFor="let coin of coins"
       (click)="onSelectCoin(coin)"
     >
-      <mat-card-title>{{ coin.name }}</mat-card-title>
+      <mat-card-title class="card-title">{{ coin.name }}</mat-card-title>
       <mat-card-subtitle>{{ coin.id }}</mat-card-subtitle>
     </mat-card>
   </div>
 
-  <!-- <mat-card>
-    <mat-card-header>
-      <div>
-        <mat-card-title>{{ selectedCoin.name }}</mat-card-title>
-        <mat-card-subtitle>{{ selectedCoin.id }}</mat-card-subtitle>
-      </div>
-
-      <div>
-        <img [src]="selectedCoin?.image?.small" />
-      </div>
-    </mat-card-header> -->
-
-    <!-- <mat-card>
-      <mat-card-header>
-        <span>{{ selectedCoin.current_price }}</span>
-        <strong>{{ selectedCoin.coingecko_rank }}</strong> /
-        <strong>{{ selectedCoin.coingecko_score }}</strong>
-      </mat-card-header>
-      <mat-card-content>
-        <span *ngFor="let description of descriptions">
-          <strong>{{ description.currency }}</strong>
-          <p>{{ description.description }}</p>
-        </span>
-
-        <span>More Info</span>
-        <div style="display: flex; flex-direction: column">
-          <span *ngFor="let c of currencies">
-            <a
-              href="https://api.coingecko.com/api/v3/coins/markets?vs_currency=en"
-              >{{
-                "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" +
-                  c.currency
-              }}</a
-            >
-          </span>
-        </div>
-      </mat-card-content>
-
-      <mat-card-footer> </mat-card-footer>
-    </mat-card> -->
-  <!-- </mat-card> -->
+  <div *ngIf="showCoinDetail">
+    <app-coin-detail
+      [selectedCoin]="selectedCoin"
+      [coinDescriptions]="descriptions"
+    ></app-coin-detail>
+  </div>
 </div>

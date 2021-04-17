@@ -1,0 +1,62 @@
+<mat-card class="coin-detail">
+  <mat-card-header class="card-header">
+    <div class="card-header-description">
+      <a
+        href="coins"
+        mat-icon-button
+        color="warn"
+        class="card-header-button-back"
+      >
+        <mat-icon class="card-header-button-back"> chevron_left</mat-icon>
+      </a>
+
+      <div>
+        <mat-card-title>{{ selectedCoin.name }}</mat-card-title>
+        <mat-card-subtitle>{{ selectedCoin.id }}</mat-card-subtitle>
+      </div>
+    </div>
+
+    <div class="">
+      <img [src]="selectedCoin?.image?.small" />
+    </div>
+  </mat-card-header>
+
+  <mat-card>
+    <mat-card-header class="card-summary-header">
+      <section>
+        <span
+          >Price <b>({{ currentCurrency }}) </b>
+        </span>
+        <strong>{{ currentPrice }}</strong>
+      </section>
+
+      <section>
+        <span>Rank </span>
+        <strong>{{ selectedCoin.coingecko_rank }}</strong> /
+        <span>Score </span>
+        <strong>{{ selectedCoin.coingecko_score }}</strong>
+      </section>
+    </mat-card-header>
+    <mat-card-content>
+      <span *ngFor="let description of coinDescriptions">
+        <strong>{{ description.currency }}</strong>
+        <p>{{ description.description }}</p>
+      </span>
+
+      <span>More Info</span>
+      <div style="display: flex; flex-direction: column">
+        <span *ngFor="let c of coinCurrencies">
+          <a
+            href="https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
+            >{{
+              "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" +
+                c.currency
+            }}</a
+          >
+        </span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card-footer> </mat-card-footer>
+</mat-card>
